@@ -6,12 +6,15 @@ public class DeckContainer : MonoBehaviour
     [SerializeField] private GameObject[] baseDeck;
     [SerializeField] private GameObject[] myDeck;
 
+    [SerializeField] private Transform playerHand;
+
     private void Start()
     {
         SetupDeck();
         ShuffleDeck();
+        DisplayDeck();
     }
-
+    
     void SetupDeck()
     {
         myDeck = new GameObject[baseDeck.Length];
@@ -27,5 +30,11 @@ public class DeckContainer : MonoBehaviour
     {
         var rand = new Random();
         rand.ShuffleArray(myDeck);
+    }
+    
+    private void DisplayDeck()
+    {
+        playerHand.DetachChildren();
+        
     }
 }

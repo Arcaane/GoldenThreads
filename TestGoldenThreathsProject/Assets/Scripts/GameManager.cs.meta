@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 6e9948c8812caf4498b73a0fa444f990
+guid: 454b8863dc0ccc9469e285ddea69ac61
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - cardSplash: {fileID: 21300000, guid: cbe11e934b0b14f418e61c455862a5d3, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
