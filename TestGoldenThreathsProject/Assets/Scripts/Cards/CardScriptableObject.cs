@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Card")]
-public class Cards : ScriptableObject
+public class CardScriptableObject : ScriptableObject
 {
     [Header("Base Informations")]
     public new string cardName;

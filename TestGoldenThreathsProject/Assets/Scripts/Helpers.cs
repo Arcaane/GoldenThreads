@@ -70,5 +70,4 @@ public static class Helpers
             (array[n], array[k]) = (array[k], array[n]);
         }
     }
-    
 }

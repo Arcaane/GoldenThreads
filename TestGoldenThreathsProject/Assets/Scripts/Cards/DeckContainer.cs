@@ -7,6 +7,7 @@ public class DeckContainer : MonoBehaviour
     [SerializeField] private GameObject[] myDeck;
 
     [SerializeField] private Transform playerHand;
+    [SerializeField] private int cardInHandAtTheStartOfTheTurn = 5;
 
     private void Start()
     {
@@ -34,7 +35,9 @@ public class DeckContainer : MonoBehaviour
     
     private void DisplayDeck()
     {
-        playerHand.DetachChildren();
-        
+        for (int i = 0; i < cardInHandAtTheStartOfTheTurn; i++)
+        {
+            Instantiate(myDeck[i], playerHand);
+        }
     }
 }
