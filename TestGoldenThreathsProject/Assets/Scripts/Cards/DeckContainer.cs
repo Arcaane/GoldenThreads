@@ -1,43 +1,78 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
 public class DeckContainer : MonoBehaviour
 {
     [SerializeField] private GameObject[] baseDeck;
-    [SerializeField] private GameObject[] myDeck;
-
-    [SerializeField] private Transform playerHand;
+    
+    [SerializeField] private List<GameObject> drawPile;
+    [SerializeField] private List<GameObject> discardPile;
+    [SerializeField] private List<GameObject> playerHand;
+    
+    
+    [SerializeField] private RectTransform[] cardsSpawnPoints;
+    
     [SerializeField] private int cardInHandAtTheStartOfTheTurn = 5;
 
     private void Start()
     {
         SetupDeck();
         ShuffleDeck();
-        DisplayDeck();
+        SetPlayerTurnCards();
     }
     
     void SetupDeck()
     {
-        myDeck = new GameObject[baseDeck.Length];
+        drawPile = new List<GameObject>();
 
-        if (myDeck.Length < 1) return;
+        if (drawPile.Count > 1) return;
         for (int i = 0; i < baseDeck.Length; i++)
         {
-            myDeck[i] = baseDeck[i];
+            drawPile.Add(baseDeck[i]);
         }
     }
 
     void ShuffleDeck()
     {
         var rand = new Random();
-        rand.ShuffleArray(myDeck);
+        rand.ShuffleList(drawPile);
     }
     
-    private void DisplayDeck()
+    private void SetPlayerTurnCards()
     {
+        if (cardInHandAtTheStartOfTheTurn >= drawPile.Count)
+        {
+            for (int i = 0; i < cardInHandAtTheStartOfTheTurn; i++)
+            {
+                playerHand.Add(drawPile[i]);
+                drawPile.Remove(drawPile[i]);
+            }
+        }
+        else
+        {
+            foreach (var discardedCard in discardPile)
+            {
+                drawPile.Add(discardedCard);
+                discardPile.Remove(discardedCard);
+            }
+            
+            for (int i = 0; i < cardInHandAtTheStartOfTheTurn; i++)
+            {
+                playerHand.Add(drawPile[i]);
+                drawPile.Remove(drawPile[i]);
+            }
+        }
+        
         for (int i = 0; i < cardInHandAtTheStartOfTheTurn; i++)
         {
-            Instantiate(myDeck[i], playerHand);
+            Instantiate(playerHand[i], cardsSpawnPoints[i].position, Quaternion.identity, cardsSpawnPoints[i]);
         }
+    }
+
+    private void DiscardCard(GameObject card)
+    {
+        discardPile.Add(card);
+        playerHand.Remove(card);
     }
 }

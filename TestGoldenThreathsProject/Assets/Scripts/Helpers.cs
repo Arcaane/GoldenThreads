@@ -70,4 +70,14 @@ public static class Helpers
             (array[n], array[k]) = (array[k], array[n]);
         }
     }
+    
+    public static void ShuffleList<T>(this Random rng, List<T> list)
+    {
+        int n = list.Count;
+        while (n > 1) 
+        {
+            int k = rng.Next(n--);
+            (list[n], list[k]) = (list[k], list[n]);
+        }
+    }
 }

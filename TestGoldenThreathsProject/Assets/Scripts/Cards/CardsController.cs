@@ -24,9 +24,18 @@ public class CardsController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (_cardDisplay.openRoutine != null)
+        {
+            StopCoroutine(_cardDisplay.openRoutine);
+        }
+        else if(_cardDisplay.closeRoutine != null)
+        {
+            StopCoroutine(_cardDisplay.closeRoutine);
+        }
+        _cardDisplay.block = true;
+        
         Debug.Log($"Drag Begun");
         transform.SetParent(cardHandlerOnDraw);
-        _cardDisplay.block = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -36,8 +45,8 @@ public class CardsController : MonoBehaviour, IBeginDragHandler, IEndDragHandler
     
     public void OnEndDrag(PointerEventData eventData)
     {
+        _cardDisplay.block = false;
         transform.SetParent(cardHandler);
         Debug.Log($"OnEndDrag");
-        _cardDisplay.block = false;
     }
 }

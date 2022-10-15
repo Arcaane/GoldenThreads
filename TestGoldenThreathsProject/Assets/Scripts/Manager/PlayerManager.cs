@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] private int healthMax = 100;
+    [SerializeField] private int health;
+    [SerializeField] private int manaMax;
+    [SerializeField] private int mana;
+    public int currentArmor;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        health = healthMax;
+        mana = manaMax;
     }
 }
