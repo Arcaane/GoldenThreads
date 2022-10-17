@@ -934,7 +934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8056102395015292633}
   - component: {fileID: 8056102395015292635}
-  - component: {fileID: 3748922219448619224}
+  - component: {fileID: 7853066233824205283}
   m_Layer: 5
   m_Name: DefendCard
   m_TagString: Untagged
@@ -976,7 +976,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8056102395015292638}
   m_CullTransparentMesh: 1
---- !u!114 &3748922219448619224
+--- !u!114 &7853066233824205283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -985,7 +985,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8056102395015292638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d8b504493b49474da92e69bc3046559, type: 3}
+  m_Script: {fileID: 11500000, guid: 433c5c4cb1eac7f44a73dd5a41413356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardScriptableObjectSo: {fileID: 11400000, guid: 1d27d7c09fd92dc47824e4985120616b, type: 2}
@@ -995,12 +995,6 @@ MonoBehaviour:
   cardDescriptionText: {fileID: 8056102394175400549}
   cardCost: {fileID: 8056102394047226201}
   cardSplashSprite: {fileID: 8056102394365295502}
-  rectToMove: {fileID: 0}
-  upPos: {x: 0, y: 0, z: 0}
-  normalPos: {x: 0, y: 0, z: 0}
-  speedUI: 0.18
-  block: 0
-  isUp: 0
 --- !u!1 &8056102395061742011
 GameObject:
   m_ObjectHideFlags: 0

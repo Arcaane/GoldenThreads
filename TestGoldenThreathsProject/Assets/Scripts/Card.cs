@@ -32,7 +32,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     private Coroutine closeRoutine;
     private Vector3 upPos;
     private Vector3 normalPos;
-    private float speedUI = 0.18f;
+    private float speedUI = 0.10f;
     private bool block;
     private bool isUp;
 
@@ -148,7 +148,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
     #region Drag&DropFunctions
 
-    public void OnBeginDrag(PointerEventData eventData)
+    public virtual void OnBeginDrag(PointerEventData eventData)
     {
         if (openRoutine != null)
         {
@@ -165,12 +165,12 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         transform.SetParent(cardHandlerOnDraw);
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public virtual void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
     }
 
-    public void OnEndDrag(PointerEventData eventData)
+    public virtual void OnEndDrag(PointerEventData eventData)
     {
         block = false;
         transform.SetParent(cardHandler);

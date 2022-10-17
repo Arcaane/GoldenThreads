@@ -221,8 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7171254461316900231}
   - component: {fileID: 7171254461316900230}
-  - component: {fileID: 7171254461316900229}
-  - component: {fileID: -474391020569771698}
+  - component: {fileID: 4664531317672284974}
   m_Layer: 5
   m_Name: StabCard
   m_TagString: Untagged
@@ -264,7 +263,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7171254461316900248}
   m_CullTransparentMesh: 1
---- !u!114 &7171254461316900229
+--- !u!114 &4664531317672284974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,7 +272,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7171254461316900248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a06264d8e985c684ab3be67361d57a05, type: 3}
+  m_Script: {fileID: 11500000, guid: 51b52eff669be64408950f2d972f0b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cardScriptableObjectSo: {fileID: 11400000, guid: 36bbc9b584a284e42ae6ca9e3375de1a, type: 2}
@@ -283,25 +282,6 @@ MonoBehaviour:
   cardDescriptionText: {fileID: 7171254461369028899}
   cardCost: {fileID: 7171254462910353855}
   cardSplashSprite: {fileID: 7171254462491101917}
-  rectToMove: {fileID: 0}
-  upPos: {x: 0, y: 0, z: 0}
-  normalPos: {x: 0, y: 0, z: 0}
-  speedUI: 0.18
-  block: 0
-  isUp: 0
---- !u!114 &-474391020569771698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7171254461316900248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5642466219646ae49bd6ea1226360130, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cardDisplay: {fileID: 0}
 --- !u!1 &7171254461369028901
 GameObject:
   m_ObjectHideFlags: 0
