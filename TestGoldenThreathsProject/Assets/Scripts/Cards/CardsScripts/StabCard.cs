@@ -1,16 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class StabCard : Card
 {
-    public override void Start()
+    public override void OnEndDrag(PointerEventData eventData)
     {
-        base.Start();
-    }
-
-    public override void Update()
-    {
-        base.Update();
+        base.OnEndDrag(eventData);
     }
 }

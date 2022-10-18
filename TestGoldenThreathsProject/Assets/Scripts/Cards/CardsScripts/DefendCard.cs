@@ -9,24 +9,14 @@ public class DefendCard : Card
     {
         base.Start();
     }
-    
-    public override void Update()
-    {
-        base.Update();
-    }
-
-    public override void OnBeginDrag(PointerEventData eventData)
-    {
-        base.OnBeginDrag(eventData);
-    }
-
-    public override void OnDrag(PointerEventData eventData)
-    {
-        base.OnDrag(eventData);
-    }
 
     public override void OnEndDrag(PointerEventData eventData)
     {
         base.OnEndDrag(eventData);
+        
+        if (Helpers.DetectRectTransform(playerRect))
+        {
+            player.GetArmor(cardScriptableObjectSo.cardEffect.baseAmount, cardScriptableObjectSo.cardCost.baseAmount);
+        }
     }
 }

@@ -8,12 +8,12 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 {
     #region Variables
     
-    [SerializeField] private CardScriptableObject cardScriptableObjectSo;
-    private PlayerManager player;
-    //private EnemyManager enemyManager;
+    protected PlayerManager player;
+    [SerializeField] protected CardScriptableObject cardScriptableObjectSo;
+    protected RectTransform playerRect;
+    //[SerializeField] private EnemyManager enemyManager;
     #endregion
 
-    
     #region ProgVariables
     
     [SerializeField] private TextMeshProUGUI cardNameText;
@@ -38,9 +38,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
     #endregion
 
-    virtual public void Start()
+    public virtual void Start()
     {
         player = GameObject.Find("PlayerManager").GetComponent<PlayerManager>(); // Attention Couteux
+        playerRect = player.rectToAimPlayer;
         
         var parent = transform.parent;
         cardHandler = parent;
@@ -51,7 +52,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         Invoke(nameof(SetPoses), 0.5f);
     }
     
-    virtual public void Update()
+    public virtual void Update()
     {
         if (block) return;
 
@@ -71,15 +72,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         }
     }
 
-    public void GivePlayerArmor(int armorAmount)
-    {
-        player.currentArmor += armorAmount;
-    }
-
-    public void CardEffect()
-    {
-        
-    }
+    #region UI
 
     void Print()
     {
@@ -146,6 +139,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         Debug.Log($"{normalPos}  /  {upPos}");
     }
 
+    #endregion
+
     #region Drag&DropFunctions
 
     public virtual void OnBeginDrag(PointerEventData eventData)
@@ -178,4 +173,25 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     }
 
     #endregion
+    
+    #region CardsEffectsFunctions
+    public void GivePlayerArmor(int armorAmount)
+    {
+        player.currentArmor += armorAmount;
+    }
+
+    public void DealDamage(GameObject enemy, int damage, bool allEnemies = false)
+    {
+        if (allEnemies)
+        {
+            
+        }
+        else
+        {
+            IDamageable damageable = GetComponent<IDamageable>();
+            damageable?.TakeDamage(damage);
+        }
+    }
+    #endregion
+    
 }

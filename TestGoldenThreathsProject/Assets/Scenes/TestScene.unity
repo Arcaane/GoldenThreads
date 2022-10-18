@@ -2297,6 +2297,7 @@ MonoBehaviour:
   health: 0
   manaMax: 3
   mana: 0
+  rectToAimPlayer: {fileID: 1744499561}
   currentArmor: 0
 --- !u!1 &1976779321
 GameObject:
