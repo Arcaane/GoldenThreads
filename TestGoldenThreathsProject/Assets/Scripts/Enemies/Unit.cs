@@ -1,27 +1,49 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
-[RequireComponent(typeof(BattleHUD))]
 public class Unit : MonoBehaviour, IDamageable
 {
     private PlayerManager player;
+    protected EnemyScriptableCreator enemySO;
     
-    public string unitName;
-    public int currentHp;
-    private int currentShield;
-    public int maxHp;
-    private BattleHUD myHud;
-
-    public bool provideAttack = false;
-    public bool provideShield = false;
-    public bool provideExhaust = false;
+    [SerializeField] private TextMeshProUGUI nameText;
+    [SerializeField] private TextMeshProUGUI hpText;
+    [SerializeField] private Slider hpSlider;
     
+    [SerializeField] protected string unitName;
+    [SerializeField] protected int currentHp;
+    [SerializeField] protected int currentShield;
+    [SerializeField] protected int maxHp;
     
-    void Start()
+    public virtual void Start()
     {
-        myHud = GetComponent<BattleHUD>();
         player = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
+        
+        unitName = enemySO.enemyName;
+        maxHp = (int)Random.Range(enemySO.HealthRange.x, enemySO.HealthRange.y + 1);
+        currentHp = maxHp;
+        SetHUD(this);
     }
 
+    #region UI
+    
+    private void SetHUD(Unit unit)
+    {
+        nameText.text = unit.unitName;
+        hpText.text = $"{unit.currentHp} / {unit.maxHp}";
+        hpSlider.maxValue = unit.maxHp;
+        hpSlider.value = unit.currentHp;
+    }
+    
+    private void SetHp(Unit unit)
+    {
+        hpSlider.value = unit.currentHp;
+        hpText.text = $"{unit.currentHp} / {unit.maxHp}";
+    }
+    #endregion
+    
     public void TakeDamage(int damage)
     {
         if (currentShield > 0)
@@ -42,30 +64,29 @@ public class Unit : MonoBehaviour, IDamageable
             currentHp -= damage;
         }
         
-        myHud.SetHp(this);
+        SetHp(this);
 
         if (currentHp < 1)
         {
             Die();
         }
     }
-
     private void Die()
     {
         Destroy(gameObject);
     }
     
-    public void DoAttack(int i)
+    private void DoAttack(int i)
     {
         player.TakeDamage(i);
     }
 
-    public void DoShield(int i)
+    private void DoShield(int i)
     {
         currentShield += i;
     }
 
-    public void DoExhaust()
+    private void DoExhaust()
     {
         // Function dans playerManager qui permet de l'exhaust
     }

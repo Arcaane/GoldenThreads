@@ -15,7 +15,7 @@ public class DeckContainer : MonoBehaviour
     
     [SerializeField] private int cardInHandAtTheStartOfTheTurn = 5;
 
-    private void Start()
+    public void StartTurn()
     {
         SetupDeck();
         ShuffleDeck();

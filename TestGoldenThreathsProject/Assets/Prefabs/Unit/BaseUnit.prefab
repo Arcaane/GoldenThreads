@@ -166,7 +166,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitName: Harpie
   currentHp: 0
-  maxHp: 7
+  currentShield: 0
+  maxHp: 0
 --- !u!1 &3290758772558847415
 GameObject:
   m_ObjectHideFlags: 0

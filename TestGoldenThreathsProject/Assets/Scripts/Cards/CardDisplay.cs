@@ -26,7 +26,6 @@ public class CardDisplay : MonoBehaviour
     {
         cardNameText.text = cardScriptableObjectSo.cardName;
         cardTypeText.text = $"{cardScriptableObjectSo.cardType}";
-        cardClassText.text = $"{cardScriptableObjectSo.cardClass}";
 
         if (cardScriptableObjectSo.isUpgraded)
         {

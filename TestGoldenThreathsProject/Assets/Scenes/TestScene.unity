@@ -695,6 +695,7 @@ GameObject:
   m_Component:
   - component: {fileID: 552869247}
   - component: {fileID: 552869248}
+  - component: {fileID: 552869249}
   m_Layer: 0
   m_Name: BattleSystemManager
   m_TagString: Untagged
@@ -730,6 +731,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  deckContainer: {fileID: 0}
+--- !u!114 &552869249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552869246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1965f49f04057ae47a43c64981aa57b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &642065858
 GameObject:
   m_ObjectHideFlags: 0

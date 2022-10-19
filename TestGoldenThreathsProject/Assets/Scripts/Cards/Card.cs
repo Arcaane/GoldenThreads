@@ -73,12 +73,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     }
 
     #region UI
-
     void Print()
     {
         cardNameText.text = cardScriptableObjectSo.cardName;
         cardTypeText.text = $"{cardScriptableObjectSo.cardType}";
-        cardClassText.text = $"{cardScriptableObjectSo.cardClass}";
 
         if (cardScriptableObjectSo.isUpgraded)
         {
@@ -193,5 +191,4 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         }
     }
     #endregion
-    
 }
