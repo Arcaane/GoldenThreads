@@ -134,7 +134,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     {
         normalPos = rectToMove.position;
         upPos = new Vector3(normalPos.x, normalPos.y + 100f, normalPos.z);
-        Debug.Log($"{normalPos}  /  {upPos}");
+//        Debug.Log($"{normalPos}  /  {upPos}");
     }
 
     #endregion
@@ -154,7 +154,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
         block = true;
 
-        Debug.Log($"Drag Begun");
+        //Debug.Log($"Drag Begun");
         transform.SetParent(cardHandlerOnDraw);
     }
 
@@ -167,7 +167,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     {
         block = false;
         transform.SetParent(cardHandler);
-        Debug.Log($"OnEndDrag");
     }
 
     #endregion
@@ -178,7 +177,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         player.currentArmor += armorAmount;
     }
 
-    public void DealDamage(GameObject enemy, int damage, bool allEnemies = false)
+    public void DealDamage(RectTransform enemy, int damage, bool allEnemies = false)
     {
         if (allEnemies)
         {
@@ -186,8 +185,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         }
         else
         {
-            IDamageable damageable = GetComponent<IDamageable>();
+            IDamageable damageable = enemy.GetComponent<IDamageable>();
             damageable?.TakeDamage(damage);
+            enemy.GetComponent<Unit>().SetHp(enemy.GetComponent<Unit>());
         }
     }
     #endregion

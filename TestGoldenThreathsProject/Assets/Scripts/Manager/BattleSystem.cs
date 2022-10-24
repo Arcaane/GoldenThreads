@@ -6,18 +6,21 @@ public class BattleSystem : MonoBehaviour
 {
     public BattleStates state;
     public DeckContainer deckContainer;
-    
+    public EnemyManager enemyManager;
+    public PlayerManager playerManager;
+
     void Start()
     {
         state = BattleStates.START;
+        enemyManager = GetComponent<EnemyManager>();
         SetupBattle();
         StartBehavior();
     }
 
     private void SetupBattle()
     {
-        // Enemis Spawn
-        // UI Player
+        enemyManager.SpawnEnemies(enemyManager.numberOfEnemiesToSpawn);
+        playerManager.UpdateUI();
     }
 
     void StartBehavior()

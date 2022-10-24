@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,12 +7,13 @@ public class Goblin : Unit
     
     public int ChooseEffect()
     {
-        int tempEffect;
-        tempEffect = Random.Range(0, enemySO.actions.Length + 1);
+        var tempEffect = Random.Range(0, enemySO.actions.Length + 1);
+        if(currentStrength > 0) currentStrength -= 1;
+
         return tempEffect;
     }
     
-    public void ApplyEffet()
+    public void ApplyEffect()
     {
         switch (provideEffect)
         {
@@ -27,16 +26,20 @@ public class Goblin : Unit
 
     private void Effect1()
     {
-        
+       int tempDamage = (int)Random.Range(enemySO.actions[0].damageAmount.x, enemySO.actions[0].damageAmount.y + 1);
+       if(currentStrength > 0) tempDamage += currentStrength;
+
+       DoAttack(tempDamage);
     }
     
     private void Effect2()
     {
-        
+        DoAttack((int)enemySO.actions[1].damageAmount.x);
+        DoStrength(enemySO.actions[1].buffAmount);
     }
     
     private void Effect3()
     {
-        
+        DoShield(enemySO.actions[2].armorAmount);
     }
 }

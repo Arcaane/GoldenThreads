@@ -55,4 +55,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         Debug.Log($"Le joueur est crevé");
     }
+
+    public void UpdateUI()
+    {
+        UIManager.Instance.SetPlayerHealth(health, healthMax, currentArmor);
+    }
 }

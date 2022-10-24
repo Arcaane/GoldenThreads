@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class Unit : MonoBehaviour, IDamageable
 {
     private PlayerManager player;
-    protected EnemyScriptableCreator enemySO;
+    [SerializeField] protected EnemyScriptableCreator enemySO;
     
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI hpText;
@@ -15,6 +15,7 @@ public class Unit : MonoBehaviour, IDamageable
     [SerializeField] protected string unitName;
     [SerializeField] protected int currentHp;
     [SerializeField] protected int currentShield;
+    [SerializeField] protected int currentStrength;
     [SerializeField] protected int maxHp;
     
     public virtual void Start()
@@ -37,7 +38,7 @@ public class Unit : MonoBehaviour, IDamageable
         hpSlider.value = unit.currentHp;
     }
     
-    private void SetHp(Unit unit)
+    public void SetHp(Unit unit)
     {
         hpSlider.value = unit.currentHp;
         hpText.text = $"{unit.currentHp} / {unit.maxHp}";
@@ -71,22 +72,28 @@ public class Unit : MonoBehaviour, IDamageable
             Die();
         }
     }
+    
     private void Die()
     {
         Destroy(gameObject);
     }
     
-    private void DoAttack(int i)
+    protected void DoAttack(int i)
     {
         player.TakeDamage(i);
     }
 
-    private void DoShield(int i)
+    protected void DoShield(int i)
     {
         currentShield += i;
     }
 
-    private void DoExhaust()
+    protected void DoStrength(int i)
+    {
+        currentStrength += i;
+    }
+
+    protected void DoExhaust()
     {
         // Function dans playerManager qui permet de l'exhaust
     }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -17,6 +15,8 @@ public class DefendCard : Card
         if (Helpers.DetectRectTransform(playerRect))
         {
             player.GetArmor(cardScriptableObjectSo.cardEffect.baseAmount, cardScriptableObjectSo.cardCost.baseAmount);
+            DeckContainer.Instance.DiscardCard(gameObject);
+            player.UpdateUI();
         }
     }
 }
