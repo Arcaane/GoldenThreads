@@ -11,7 +11,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     protected PlayerManager player;
     [SerializeField] protected CardScriptableObject cardScriptableObjectSo;
     protected RectTransform playerRect;
-    //[SerializeField] private EnemyManager enemyManager;
     #endregion
 
     #region ProgVariables
@@ -27,11 +26,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     private float moveSpeed = 3f;
     private Transform cardHandler;
     private Transform cardHandlerOnDraw;
-    private RectTransform rectToMove;
+    public RectTransform rectToMove;
     private Coroutine openRoutine;
     private Coroutine closeRoutine;
-    private Vector3 upPos;
-    private Vector3 normalPos;
+    public Vector3 upPos;
+    public Vector3 normalPos;
     private float speedUI = 0.10f;
     private bool block;
     private bool isUp;
@@ -45,11 +44,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         
         var parent = transform.parent;
         cardHandler = parent;
-        cardHandlerOnDraw = parent.parent;
 
         Print();
         rectToMove = GetComponent<RectTransform>();
-        Invoke(nameof(SetPoses), 0.5f);
+        SetPoses();
     }
     
     public virtual void Update()
@@ -119,7 +117,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         closeRoutine = StartCoroutine(moveTo(normalPos));
     }
 
-    private IEnumerator moveTo(Vector3 pos)
+    public IEnumerator moveTo(Vector3 pos)
     {
         while (rectToMove.position != pos)
         {
@@ -134,7 +132,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     {
         normalPos = rectToMove.position;
         upPos = new Vector3(normalPos.x, normalPos.y + 100f, normalPos.z);
-//        Debug.Log($"{normalPos}  /  {upPos}");
     }
 
     #endregion
@@ -155,7 +152,7 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         block = true;
 
         //Debug.Log($"Drag Begun");
-        transform.SetParent(cardHandlerOnDraw);
+        //transform.SetParent(cardHandlerOnDraw);       ////////////////////////////////////////////////
     }
 
     public virtual void OnDrag(PointerEventData eventData)
@@ -172,9 +169,9 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     #endregion
     
     #region CardsEffectsFunctions
-    public void GivePlayerArmor(int armorAmount)
+    public void GivePlayerArmor(int armorAmount, int cardCost)
     {
-        player.currentArmor += armorAmount;
+        player.GetArmor(armorAmount, cardCost);
     }
 
     public void DealDamage(RectTransform enemy, int damage, bool allEnemies = false)

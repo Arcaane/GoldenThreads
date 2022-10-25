@@ -965,7 +965,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 464, y: 180}
+  m_AnchoredPosition: {x: -50, y: -50}
   m_SizeDelta: {x: 60, y: 85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8056102395015292635
@@ -995,6 +995,9 @@ MonoBehaviour:
   cardDescriptionText: {fileID: 8056102394175400549}
   cardCost: {fileID: 8056102394047226201}
   cardSplashSprite: {fileID: 8056102394365295502}
+  rectToMove: {fileID: 0}
+  upPos: {x: 0, y: 0, z: 0}
+  normalPos: {x: 0, y: 0, z: 0}
 --- !u!1 &8056102395061742011
 GameObject:
   m_ObjectHideFlags: 0

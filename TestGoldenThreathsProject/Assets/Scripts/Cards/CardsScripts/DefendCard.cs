@@ -14,9 +14,8 @@ public class DefendCard : Card
         
         if (Helpers.DetectRectTransform(playerRect))
         {
-            player.GetArmor(cardScriptableObjectSo.cardEffect.baseAmount, cardScriptableObjectSo.cardCost.baseAmount);
+            GivePlayerArmor(cardScriptableObjectSo.cardEffect.baseAmount, cardScriptableObjectSo.cardCost.baseAmount);
             DeckContainer.Instance.DiscardCard(gameObject);
-            player.UpdateUI();
         }
     }
 }

@@ -48,6 +48,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public void GetArmor(int armor, int cardCostAmount)
     {
         currentArmor += armor;
+        mana -= cardCostAmount;
+        UpdateUI();
         Debug.Log($"Le joueur à reçu + {armor} d'armure");
     }
         

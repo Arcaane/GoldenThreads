@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
@@ -15,6 +14,9 @@ public class DeckContainer : MonoBehaviour
     [SerializeField] private int cardInHandAtTheStartOfTheTurn = 5;
 
     public static DeckContainer Instance;
+
+    public Transform cardHandler;
+    public int cardWhoMoved;
 
     private void Awake()
     {
@@ -63,25 +65,27 @@ public class DeckContainer : MonoBehaviour
             }
         }
         
-        for (int i = 0; i < numberOfCardsToDraw; i++)
-        {
-            playerHand.Add(drawPile[i]);
-            drawPile.Remove(drawPile[i]);
-        }
         
         for (int i = 0; i < numberOfCardsToDraw; i++)
         {
-            GameObject CardGO = Instantiate(playerHand[i], cardsSpawnPoints[i].position, Quaternion.identity, cardsSpawnPoints[playerHand.Count]);
+            GameObject CardGO = Instantiate(drawPile[i], cardsSpawnPoints[i].position, Quaternion.identity, cardHandler);
+            
+            drawPile.Remove(drawPile[i]);
+            playerHand.Add(CardGO);
+            
             CardGO.SetActive(true);
         }
     }
 
     public void DiscardCard(GameObject card)
     {
-        discardPile.Add(playerHand.Find( card=> this));
-        playerHand.RemoveAt(playerHand.FindIndex(card => this));
+        bool contains = playerHand.Contains(card);
+        discardPile.Add(playerHand.Find( a=> contains));
+        playerHand.RemoveAt(playerHand.FindIndex(a => contains));
+        
         card.transform.SetParent(transform.root);
         card.SetActive(false);
+        
         ReplaceCards();
     }
 
@@ -89,7 +93,9 @@ public class DeckContainer : MonoBehaviour
     {
         for (int i = 0; i < playerHand.Count; i++)
         {
-            Debug.Log("Done " + playerHand[i].name);
+            Card cardToMove = playerHand[i].GetComponent<Card>();
+            cardToMove.normalPos += new Vector3(-200, 0);
+            cardToMove.upPos += new Vector3(-200, 0);
         }
     }
 }
