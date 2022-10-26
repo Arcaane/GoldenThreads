@@ -1,22 +1,28 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Random = System.Random;
 
 public class DeckContainer : MonoBehaviour
 {
-    [SerializeField] private GameObject[] baseDeck;
+    [SerializeField] private Card[] baseDeck;
     
-    [SerializeField] private List<GameObject> drawPile;
-    [SerializeField] private List<GameObject> discardPile;
-    [SerializeField] private List<GameObject> playerHand;
-    [SerializeField] private RectTransform[] cardsSpawnPoints;
+    [SerializeField] private List<Card> drawPile;
+    [SerializeField] private TextMeshProUGUI deckSizeText;
+    
+    [SerializeField] private List<Card> discardPile;
+    [SerializeField] private TextMeshProUGUI discardPileSizeText;
+
+    [SerializeField] private List<Card> playerHand;
+    
+    public Transform[] cardSlots;
+    public bool[] availableCardSlots;
     
     [SerializeField] private int cardInHandAtTheStartOfTheTurn = 5;
 
     public static DeckContainer Instance;
 
     public Transform cardHandler;
-    public int cardWhoMoved;
 
     private void Awake()
     {
@@ -37,7 +43,7 @@ public class DeckContainer : MonoBehaviour
     
     void SetupDeck()
     {
-        drawPile = new List<GameObject>();
+        drawPile = new List<Card>();
 
         if (drawPile.Count > 1) return;
         for (int i = 0; i < baseDeck.Length; i++)
@@ -54,48 +60,69 @@ public class DeckContainer : MonoBehaviour
     
     public void DrawCard(int numberOfCardsToDraw)
     {
-        if (numberOfCardsToDraw > drawPile.Count)
+        if (drawPile.Count >= numberOfCardsToDraw)
         {
-            Debug.Log(discardPile.Count);
-            
-            for (int i = 0; i < discardPile.Count; i++)
+            for (int i = 0; i < numberOfCardsToDraw; i++)
             {
-                discardPile.RemoveAt(i);
-                drawPile.Add(discardPile[i]);
+                if (availableCardSlots[playerHand.Count] == true)
+                {
+                    Card newCardDrawed = Instantiate(drawPile[i]);
+                    
+                    var cardTransform = newCardDrawed.transform;
+                    
+                    newCardDrawed.gameObject.SetActive(true);
+                    newCardDrawed.handIndex = i;
+                    cardTransform.position = cardSlots[i].position;
+                    cardTransform.parent = cardHandler;
+                    drawPile.Remove(newCardDrawed);
+                    playerHand.Add(newCardDrawed);
+                    availableCardSlots[i] = false;
+                }
+                else
+                {
+                    Debug.Log("NON");
+                }
             }
         }
-        
-        
-        for (int i = 0; i < numberOfCardsToDraw; i++)
+        else
         {
-            GameObject CardGO = Instantiate(drawPile[i], cardsSpawnPoints[i].position, Quaternion.identity, cardHandler);
-            
-            drawPile.Remove(drawPile[i]);
-            playerHand.Add(CardGO);
-            
-            CardGO.SetActive(true);
+            ReplaceCardInDrawPile();
         }
+
+        deckSizeText.text = drawPile.Count.ToString();
+        discardPileSizeText.text = discardPile.Count.ToString();
     }
 
-    public void DiscardCard(GameObject card)
+    public void DiscardCard(Card card)
     {
-        bool contains = playerHand.Contains(card);
-        discardPile.Add(playerHand.Find( a=> contains));
-        playerHand.RemoveAt(playerHand.FindIndex(a => contains));
-        
-        card.transform.SetParent(transform.root);
-        card.SetActive(false);
-        
-        ReplaceCards();
+        discardPile.Add(card);
+        playerHand.Remove(card);
+        card.gameObject.SetActive(false);
+        availableCardSlots[card.handIndex] = true;
+        ReplaceCards(card.handIndex);
     }
 
-    private void ReplaceCards()
+    private void ReplaceCardInDrawPile()
     {
-        for (int i = 0; i < playerHand.Count; i++)
+        foreach (Card card in discardPile)
         {
-            Card cardToMove = playerHand[i].GetComponent<Card>();
-            cardToMove.normalPos += new Vector3(-200, 0);
-            cardToMove.upPos += new Vector3(-200, 0);
+            drawPile.Add(card);
+        }
+        discardPile.Clear();
+    }
+    
+    private void ReplaceCards(int lastIndexGone)
+    {
+        for (int i = lastIndexGone; i < playerHand.Count; i++)
+        {
+            playerHand[i].transform.position = cardSlots[i].position;
+            playerHand[i].SetPoses();
+            
+            playerHand[i].handIndex --;
+            availableCardSlots[i + 1] = true;
+            availableCardSlots[i] = false;
+            
+            
         }
     }
 }

@@ -35,6 +35,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     private bool block;
     private bool isUp;
 
+    public int handIndex;
+
     #endregion
 
     public virtual void Start()
@@ -54,6 +56,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     {
         if (block) return;
 
+        DetectCard();
+    }
+
+    private void DetectCard()
+    {
         if (Helpers.DetectRectTransform(rectToMove))
         {
             if (!isUp)
@@ -128,10 +135,11 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         yield return 0;
     }
 
-    private void SetPoses()
+    public void SetPoses()
     {
         normalPos = rectToMove.position;
         upPos = new Vector3(normalPos.x, normalPos.y + 100f, normalPos.z);
+        DetectCard();
     }
 
     #endregion
@@ -150,9 +158,6 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         }
 
         block = true;
-
-        //Debug.Log($"Drag Begun");
-        //transform.SetParent(cardHandlerOnDraw);       ////////////////////////////////////////////////
     }
 
     public virtual void OnDrag(PointerEventData eventData)

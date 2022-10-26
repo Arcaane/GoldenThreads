@@ -5,7 +5,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     [SerializeField] private int healthMax = 100;
     [SerializeField] private int health;
     [SerializeField] private int manaMax;
-    [SerializeField] private int mana;
+    private int mana;
 
     public RectTransform rectToAimPlayer;
     public int currentArmor;
