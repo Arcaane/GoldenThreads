@@ -95,7 +95,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!1 &1764002436140989472
+--- !u!1 &2419170459664979182
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,9 +103,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4926223931732596636}
-  - component: {fileID: 85722954961001192}
-  - component: {fileID: 7550880157592168461}
+  - component: {fileID: 61974512351213551}
+  - component: {fileID: 3170575114063810638}
+  - component: {fileID: 7971920103665470508}
   m_Layer: 0
   m_Name: EnemyIntentIcon
   m_TagString: Untagged
@@ -113,14 +113,14 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4926223931732596636
+--- !u!224 &61974512351213551
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764002436140989472}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 2419170459664979182}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -133,21 +133,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 200}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &85722954961001192
+--- !u!222 &3170575114063810638
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764002436140989472}
+  m_GameObject: {fileID: 2419170459664979182}
   m_CullTransparentMesh: 1
---- !u!114 &7550880157592168461
+--- !u!114 &7971920103665470508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1764002436140989472}
+  m_GameObject: {fileID: 2419170459664979182}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -180,9 +180,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3290758772436957447}
-  - component: {fileID: 4708127065943061806}
+  - component: {fileID: -6611022482421601038}
   m_Layer: 0
-  m_Name: Goblin
+  m_Name: Spider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -204,7 +204,7 @@ RectTransform:
   - {fileID: 3290758772580795542}
   - {fileID: 3290758772558847414}
   - {fileID: 918898051}
-  - {fileID: 4926223931732596636}
+  - {fileID: 61974512351213551}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -213,7 +213,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4708127065943061806
+--- !u!114 &-6611022482421601038
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -222,19 +222,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 3290758772436957440}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ae2e90b16051ff488b5cdb2eff86bcc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f895050c1b111443b655d3151f2502d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySO: {fileID: 11400000, guid: 2fba352699fb75446a299fd70db1f0ad, type: 2}
+  enemySO: {fileID: 11400000, guid: 5f45a78f047a7bc4aa08064babd7d221, type: 2}
   nameText: {fileID: 3290758772580795541}
   hpText: {fileID: 3290758773350296581}
   hpSlider: {fileID: 3290758772558847413}
+  intentIcon: {fileID: 0}
   unitName: 
   currentHp: 0
   currentShield: 0
   currentStrength: 0
   maxHp: 0
   provideEffect: 0
+  spiderlingWasKilled: 0
 --- !u!1 &3290758772558847415
 GameObject:
   m_ObjectHideFlags: 0

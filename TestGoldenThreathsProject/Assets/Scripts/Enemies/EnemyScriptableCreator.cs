@@ -18,7 +18,9 @@ public class EnemyScriptableCreator : ScriptableObject
 
         public Debuff debuffType;
         public Buff buffType;
-        public ScriptableObject summonEntity;
+        public GameObject summonEntity;
+        
+        public Sprite intentIcon;
     }
     
     public enum EnemyType

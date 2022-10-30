@@ -22,15 +22,18 @@ MonoBehaviour:
     debuffType: 0
     buffType: 0
     summonEntity: {fileID: 0}
+    intentIcon: {fileID: 21300000, guid: 5c87c6b7f72d3d145ac25bb511c1d11d, type: 3}
   - damageAmount: {x: 3, y: 0}
     armorAmount: 0
     buffAmount: 2
     debuffType: 0
     buffType: 1
     summonEntity: {fileID: 0}
+    intentIcon: {fileID: 21300000, guid: 5c87c6b7f72d3d145ac25bb511c1d11d, type: 3}
   - damageAmount: {x: 0, y: 0}
     armorAmount: 7
     buffAmount: 0
     debuffType: 0
     buffType: 0
     summonEntity: {fileID: 0}
+    intentIcon: {fileID: 21300000, guid: fdf4842c0e85306429469098f0b2b6c4, type: 3}

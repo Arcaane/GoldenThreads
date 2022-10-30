@@ -22,3 +22,4 @@ MonoBehaviour:
     debuffType: 0
     buffType: 0
     summonEntity: {fileID: 0}
+    intentIcon: {fileID: 21300000, guid: 5c87c6b7f72d3d145ac25bb511c1d11d, type: 3}

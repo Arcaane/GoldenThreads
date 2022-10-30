@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Spider
   enemyType: 0
-  HealthRange: {x: 0, y: 0}
+  HealthRange: {x: 30, y: 40}
   actions:
   - damageAmount: {x: 6, y: 0}
     armorAmount: 0
@@ -22,15 +22,18 @@ MonoBehaviour:
     debuffType: 1
     buffType: 0
     summonEntity: {fileID: 0}
+    intentIcon: {fileID: 21300000, guid: 5c87c6b7f72d3d145ac25bb511c1d11d, type: 3}
   - damageAmount: {x: 0, y: 0}
     armorAmount: 0
     buffAmount: 0
     debuffType: 0
     buffType: 0
     summonEntity: {fileID: 11400000, guid: 85f55d26ba9d90645a7a2d4c98d3639c, type: 2}
+    intentIcon: {fileID: 21300000, guid: a10b6b16dafd70448adebd26d369ab10, type: 3}
   - damageAmount: {x: 17, y: 0}
     armorAmount: 0
     buffAmount: 0
     debuffType: 0
     buffType: 0
     summonEntity: {fileID: 0}
+    intentIcon: {fileID: 21300000, guid: 683ee2a96d49cb34c9a9b9d0a4808e37, type: 3}

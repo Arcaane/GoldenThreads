@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour, IDamageable
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI hpText;
     [SerializeField] private Slider hpSlider;
+    [SerializeField] protected Image intentIcon; 
     
     [SerializeField] protected string unitName;
     [SerializeField] protected int currentHp;
@@ -18,6 +19,7 @@ public class Unit : MonoBehaviour, IDamageable
     [SerializeField] protected int currentStrength;
     [SerializeField] protected int maxHp;
     
+    [SerializeField] protected int provideEffect;
     public virtual void Start()
     {
         player = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
@@ -25,6 +27,7 @@ public class Unit : MonoBehaviour, IDamageable
         unitName = enemySO.enemyName;
         maxHp = (int)Random.Range(enemySO.HealthRange.x, enemySO.HealthRange.y + 1);
         currentHp = maxHp;
+        
         SetHUD(this);
     }
 
@@ -36,6 +39,7 @@ public class Unit : MonoBehaviour, IDamageable
         hpText.text = $"{unit.currentHp} / {unit.maxHp}";
         hpSlider.maxValue = unit.maxHp;
         hpSlider.value = unit.currentHp;
+        intentIcon.gameObject.SetActive(false);
     }
     
     public void SetHp(Unit unit)
@@ -44,6 +48,19 @@ public class Unit : MonoBehaviour, IDamageable
         hpText.text = $"{unit.currentHp} / {unit.maxHp}";
     }
     #endregion
+
+    #region Functions Region
+
+    protected virtual int ChooseEffect()
+    {
+        var tempEffect = Random.Range(0, enemySO.actions.Length + 1);
+        if(currentStrength > 0) currentStrength -= 1;
+
+        intentIcon.sprite = enemySO.actions[tempEffect].intentIcon;
+        intentIcon.gameObject.SetActive(true);
+
+        return tempEffect;
+    }
     
     public void TakeDamage(int damage)
     {
@@ -92,9 +109,13 @@ public class Unit : MonoBehaviour, IDamageable
     {
         currentStrength += i;
     }
-
+    
     protected void DoExhaust()
     {
         // Function dans playerManager qui permet de l'exhaust
     }
+
+    protected virtual void ApplyEffect() { }
+    
+    #endregion
 }

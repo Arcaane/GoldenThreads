@@ -3,18 +3,9 @@ using Random = UnityEngine.Random;
 
 public class Goblin : Unit
 {
-    [SerializeField] private int provideEffect;
-    
-    public int ChooseEffect()
+    protected override void ApplyEffect()
     {
-        var tempEffect = Random.Range(0, enemySO.actions.Length + 1);
-        if(currentStrength > 0) currentStrength -= 1;
-
-        return tempEffect;
-    }
-    
-    public void ApplyEffect()
-    {
+        base.ApplyEffect();
         switch (provideEffect)
         {
             case 1: Effect1(); break;

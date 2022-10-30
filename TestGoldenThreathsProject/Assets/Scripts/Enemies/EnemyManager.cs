@@ -10,6 +10,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject[] typeOfEnemyICanUse;
     [SerializeField] private GameObject[] enemiesSpawnPoints;
     [SerializeField] public List<RectTransform> enemiesRect;
+
+    public int maxEnemiesOnBoard = 4;
     
 
     private void Awake()
@@ -22,7 +24,7 @@ public class EnemyManager : MonoBehaviour
         Instance = this;
     }
     
-    public void SpawnEnemies(int x)
+    public void SpawnEnemies(int x, GameObject enemyPrefab = null)
     {
         if (typeOfEnemyICanUse.Length == 0)
         {
@@ -31,8 +33,16 @@ public class EnemyManager : MonoBehaviour
         
         for (int i = 0; i < x; i++)
         {
-            if (enemiesOnBoard < 3)
+            if (enemiesOnBoard < maxEnemiesOnBoard)
             {
+                if (enemyPrefab)
+                {
+                    RectTransform rE = Instantiate(enemyPrefab, enemiesSpawnPoints[enemiesOnBoard].transform).GetComponent<RectTransform>();
+                    enemiesRect.Add(rE);
+                    enemiesOnBoard++;
+                    return;
+                }
+                
                 if (typeOfEnemyICanUse.Length == 1)
                 {
                     RectTransform rE = Instantiate(typeOfEnemyICanUse[0], enemiesSpawnPoints[enemiesOnBoard].transform).GetComponent<RectTransform>();
@@ -51,6 +61,17 @@ public class EnemyManager : MonoBehaviour
             {
                 Debug.Log("No more enemy slot avalable");
             }
+        }
+    }
+
+    public void ProvideAllEffects()
+    {
+        if (enemiesOnBoard == 0) return;
+
+        for (int i = 0; i < enemiesRect.Count; i++)
+        {
+            enemiesRect[i].GetComponent<Unit>()
+            
         }
     }
 }
