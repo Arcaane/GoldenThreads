@@ -70,8 +70,7 @@ public class EnemyManager : MonoBehaviour
 
         for (int i = 0; i < enemiesRect.Count; i++)
         {
-            enemiesRect[i].GetComponent<Unit>()
-            
+            enemiesRect[i].GetComponent<Unit>().ApplyEffect();
         }
     }
 }

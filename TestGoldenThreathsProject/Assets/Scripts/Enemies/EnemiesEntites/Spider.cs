@@ -6,7 +6,7 @@ public class Spider : Unit
 {
     public bool spiderlingWasKilled;
     
-    protected override void ApplyEffect()
+    public override void ApplyEffect()
     {
         base.ApplyEffect();
         

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spiderling : Unit
 {
-    protected override void ApplyEffect()
+    public override void ApplyEffect()
     {
         base.ApplyEffect();
         switch (provideEffect)

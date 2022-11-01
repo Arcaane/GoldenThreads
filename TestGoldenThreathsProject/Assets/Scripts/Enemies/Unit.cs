@@ -115,7 +115,7 @@ public class Unit : MonoBehaviour, IDamageable
         // Function dans playerManager qui permet de l'exhaust
     }
 
-    protected virtual void ApplyEffect() { }
+    public virtual void ApplyEffect() { }
     
     #endregion
 }
