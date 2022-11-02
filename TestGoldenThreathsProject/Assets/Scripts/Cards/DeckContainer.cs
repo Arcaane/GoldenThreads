@@ -11,7 +11,6 @@ public class DeckContainer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI deckSizeText;
     
     [SerializeField] private List<Card> discardPile;
-    [SerializeField] private TextMeshProUGUI discardPileSizeText;
 
     [SerializeField] private List<Card> playerHand;
     
@@ -34,7 +33,7 @@ public class DeckContainer : MonoBehaviour
         Instance = this;
     }
 
-    public void StartTurn()
+    public void StartDuel()
     {
         SetupDeck();
         ShuffleDeck();
@@ -82,15 +81,15 @@ public class DeckContainer : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("NON");
+                    Debug.Log("Slot invalide ou inexistant");
                 }
             }
         }
         else
         {
             ReplaceCardInDrawPile();
+            DrawCard(numberOfCardsToDraw);
         }
-        CardsCountHud();
     }
 
     public void DiscardCard(Card card)
@@ -131,6 +130,14 @@ public class DeckContainer : MonoBehaviour
     private void CardsCountHud()
     {
         deckSizeText.text = drawPile.Count.ToString();
-        discardPileSizeText.text = discardPile.Count.ToString();
+        //discardPileSizeText.text = discardPile.Count.ToString();
+    }
+
+    public void StartTurn()
+    {
+        if (playerHand.Count < cardInHandAtTheStartOfTheTurn)
+        {
+            DrawCard(cardInHandAtTheStartOfTheTurn - playerHand.Count);
+        }
     }
 }

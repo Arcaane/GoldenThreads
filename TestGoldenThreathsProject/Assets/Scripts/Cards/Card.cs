@@ -8,8 +8,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 {
     #region Variables
     
-    protected PlayerManager player;
     [SerializeField] protected CardScriptableObject cardScriptableObjectSo;
+    protected PlayerManager player;
     protected RectTransform playerRect;
     #endregion
 
@@ -36,17 +36,20 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     private bool isUp;
 
     public int handIndex;
-
+    public int playablePartDeck = 2;
+    public int visiblePartDeck = 5;
+    public bool canPlayCard;
+    [SerializeField] private RectTransform cardBack;
     #endregion
 
     public virtual void Start()
     {
-        player = GameObject.Find("PlayerManager").GetComponent<PlayerManager>(); // Attention Couteux
+        player = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
         playerRect = player.rectToAimPlayer;
         
         var parent = transform.parent;
         cardHandler = parent;
-
+        
         Print();
         rectToMove = GetComponent<RectTransform>();
         SetPoses();
@@ -55,8 +58,18 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     public virtual void Update()
     {
         if (block) return;
-
         DetectCard();
+        
+        canPlayCard = (player.currentMana - cardScriptableObjectSo.cardCost.baseAmount > -1 && handIndex < playablePartDeck); // Doit être bougé dans une fonction
+        
+        if (handIndex < visiblePartDeck) // Doit être bougé dans une fonction
+        {
+            cardBack.gameObject.SetActive(false);
+        }
+        else
+        {
+            cardBack.gameObject.SetActive(true);
+        }
     }
 
     private void DetectCard()
@@ -162,7 +175,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
     public virtual void OnDrag(PointerEventData eventData)
     {
-        transform.position = Input.mousePosition;
+        if (canPlayCard)
+        {
+            transform.position = Input.mousePosition;
+        }
     }
 
     public virtual void OnEndDrag(PointerEventData eventData)
@@ -176,20 +192,26 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     #region CardsEffectsFunctions
     public void GivePlayerArmor(int armorAmount, int cardCost)
     {
-        player.GetArmor(armorAmount, cardCost);
+        player.ManaCost(cardCost);
+        player.GetArmor(armorAmount);
     }
 
-    public void DealDamage(RectTransform enemy, int damage, bool allEnemies = false)
+    public void DealDamage(RectTransform enemy, int damage, int manaCost, bool allEnemies = false)
     {
+        player.ManaCost(manaCost);
+
         if (allEnemies)
         {
-            
+            foreach (var e in EnemyManager.Instance.enemiesRect)
+            {
+                IDamageable damageable = e.GetComponent<IDamageable>();
+                damageable?.TakeDamage(damage);
+            }
         }
         else
         {
             IDamageable damageable = enemy.GetComponent<IDamageable>();
             damageable?.TakeDamage(damage);
-            enemy.GetComponent<Unit>().SetHp(enemy.GetComponent<Unit>());
         }
     }
     #endregion

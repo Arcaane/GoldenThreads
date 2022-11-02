@@ -19,7 +19,7 @@ public class Unit : MonoBehaviour, IDamageable
     [SerializeField] protected int currentStrength;
     [SerializeField] protected int maxHp;
     
-    [SerializeField] protected int provideEffect;
+    [SerializeField] public int provideEffect;
     public virtual void Start()
     {
         player = GameObject.Find("PlayerManager").GetComponent<PlayerManager>();
@@ -35,7 +35,7 @@ public class Unit : MonoBehaviour, IDamageable
     
     private void SetHUD(Unit unit)
     {
-        intentIcon.gameObject.SetActive(false);
+        //intentIcon.gameObject.SetActive(false);
         nameText.text = unit.unitName;
         hpText.text = $"{unit.currentHp} / {unit.maxHp}";
         hpSlider.maxValue = unit.maxHp;
@@ -55,12 +55,12 @@ public class Unit : MonoBehaviour, IDamageable
     {
         if(currentStrength > 0) currentStrength -= 1;
         
-        provideEffect = 0;
-        var tempEffect = Random.Range(0, enemySO.actions.Length);
+        provideEffect = Random.Range(0, enemySO.actions.Length);
         
-        intentIcon.sprite = enemySO.actions[tempEffect].intentIcon;
+        intentIcon.sprite = enemySO.actions[provideEffect].intentIcon;
         intentIcon.gameObject.SetActive(true);
-        provideEffect = tempEffect;
+        
+        Debug.Log($"{gameObject.name} effect provided : {provideEffect}");
     }
     
     public void TakeDamage(int damage)
@@ -83,7 +83,7 @@ public class Unit : MonoBehaviour, IDamageable
             currentHp -= damage;
         }
         
-        SetHp(this);
+        SetHp(gameObject.GetComponent<Unit>());
 
         if (currentHp < 1)
         {
@@ -94,21 +94,27 @@ public class Unit : MonoBehaviour, IDamageable
     private void Die()
     {
         Destroy(gameObject);
+        EnemyManager.Instance.enemiesRect.Remove(this.GetComponent<RectTransform>());
+        EnemyManager.Instance.enemiesOnBoard--;
     }
     
     protected void DoAttack(int i)
     {
         player.TakeDamage(i);
+        Debug.Log($"Player took {i} damages");
     }
 
     protected void DoShield(int i)
     {
         currentShield += i;
+        Debug.Log($"{enemySO.enemyName} gain {i} shield");
     }
 
     protected void DoStrength(int i)
     {
         currentStrength += i;
+        Debug.Log($"{enemySO.enemyName} gain {i} strength");
+
     }
     
     protected void DoExhaust()

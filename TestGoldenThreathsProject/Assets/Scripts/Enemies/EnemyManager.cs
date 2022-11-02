@@ -5,7 +5,7 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance;
     
-    private int enemiesOnBoard = 0;
+    public int enemiesOnBoard = 0;
     public int numberOfEnemiesToSpawn;
     [SerializeField] private GameObject[] typeOfEnemyICanUse;
     [SerializeField] private GameObject[] enemiesSpawnPoints;
@@ -40,6 +40,7 @@ public class EnemyManager : MonoBehaviour
                     RectTransform rE = Instantiate(enemyPrefab, enemiesSpawnPoints[enemiesOnBoard].transform).GetComponent<RectTransform>();
                     enemiesRect.Add(rE);
                     enemiesOnBoard++;
+                    rE.GetComponent<Unit>().provideEffect = 99;
                     return;
                 }
                 

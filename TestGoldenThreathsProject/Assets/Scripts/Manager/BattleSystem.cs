@@ -19,15 +19,13 @@ public class BattleSystem : MonoBehaviour
 
     private void SetupBattle()
     {
-        playerManager.UpdateUI();
         enemyManager.SpawnEnemies(enemyManager.numberOfEnemiesToSpawn);
     }
 
     void StartBehavior()
     {
-        deckContainer.StartTurn(); // Cartes joueur
+        deckContainer.StartDuel(); // Cartes joueur
         playerManager.UpdateUI(); // UI Player
-        enemyManager.ProvideAllEffects(); // Enemis Behavior à la fin du tour
         
         state = BattleStates.PLAYERTURN;
         PlayerTurnBehavior();  // --> Passer au tour du joueur (1)
@@ -35,7 +33,9 @@ public class BattleSystem : MonoBehaviour
 
     void PlayerTurnBehavior()
     {
-        // Quand le joueur n'as plus de mana -> Passer au tour enemis
+        playerManager.StartTurn();
+        deckContainer.StartTurn();
+        enemyManager.ProvideAllEffects(); // Enemis Behavior à la fin du tour
     }
 
     void EnemyTurnBehavior()
@@ -60,8 +60,8 @@ public class BattleSystem : MonoBehaviour
         {
             // Mort + Stats 
             playerManager.PlayerDeath();
-        }
-        else
+        } 
+        else if (state == BattleStates.WON)
         {
             // Récompense + Effect de fin de combat
             playerManager.PlayerWin();

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Card", menuName = "Card")]
 public class CardScriptableObject : ScriptableObject
@@ -18,7 +19,6 @@ public class CardScriptableObject : ScriptableObject
     [Space(5)]
     [Header("Graphs")]
     public Sprite cardSplash;
-    //public Sprite cardIcon;
 }
 
 [System.Serializable]

@@ -9,9 +9,11 @@ public class Spiderling : Unit
         base.ApplyEffect();
         switch (provideEffect)
         {
-            case 1: Effect1(); break;
+            case 0: Effect1(); break;
             default: Debug.Log("Y'a r frr t'as déconné"); break;
         }
+        
+        Debug.Log($"{gameObject.name} effect done : {provideEffect}");
     }
 
     private void Effect1()

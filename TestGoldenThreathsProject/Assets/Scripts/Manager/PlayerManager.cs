@@ -6,7 +6,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     [SerializeField] private int health;
     [SerializeField] private int manaMax;
     [HideInInspector] public bool isDead = false;
-    private int mana;
+    public int currentMana;
     
     public RectTransform rectToAimPlayer;
     public int currentArmor;
@@ -15,8 +15,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     void Start()
     {
         health = healthMax;
-        mana = manaMax;
-        UpdateUI();
+        StartTurn();
     }
 
     public void TakeDamage(int damage)
@@ -40,21 +39,20 @@ public class PlayerManager : MonoBehaviour, IDamageable
         {
             health -= damage;
         }
-
-        UpdateUI();
         
         if (health < 1)
         {
             PlayerDeath();
         }
+        
+        UIManager.Instance.SetPlayerHealth(health, healthMax, currentArmor);
     }
 
-    public void GetArmor(int armor, int cardCostAmount)
+    public void GetArmor(int armor)
     {
         currentArmor += armor;
-        mana -= cardCostAmount;
+        
         UpdateUI();
-        Debug.Log($"Le joueur à reçu + {armor} d'armure");
     }
 
     public void PlayerDeath()
@@ -71,6 +69,19 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public void UpdateUI()
     {
         UIManager.Instance.SetPlayerHealth(health, healthMax, currentArmor);
-        UIManager.Instance.SetPlayerMana(mana, manaMax);
+        UIManager.Instance.SetPlayerMana(currentMana, manaMax);
+    }
+
+    public void ManaCost(int manaCost)
+    {
+        currentMana -= manaCost;
+        UIManager.Instance.SetPlayerMana(currentMana, manaMax);
+    }
+
+    public void StartTurn()
+    {
+        currentMana = manaMax;
+        currentArmor = 0;
+        UpdateUI();
     }
 }
