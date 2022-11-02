@@ -50,7 +50,7 @@ public class EnemyManager : MonoBehaviour
                 }
                 else
                 {
-                    int enemyTemp = Random.Range(0, typeOfEnemyICanUse.Length + 1);
+                    int enemyTemp = Random.Range(0, typeOfEnemyICanUse.Length);
                     RectTransform rE = Instantiate(typeOfEnemyICanUse[enemyTemp], enemiesSpawnPoints[enemiesOnBoard].transform).GetComponent<RectTransform>();
                     enemiesRect.Add(rE);
                 }
@@ -65,6 +65,16 @@ public class EnemyManager : MonoBehaviour
     }
 
     public void ProvideAllEffects()
+    {
+        if (enemiesOnBoard == 0) return;
+
+        for (int i = 0; i < enemiesRect.Count; i++)
+        {
+            enemiesRect[i].GetComponent<Unit>().ChooseEffect();
+        }
+    }
+
+    public void ApplyAllEffects()
     {
         if (enemiesOnBoard == 0) return;
 

@@ -35,11 +35,11 @@ public class Unit : MonoBehaviour, IDamageable
     
     private void SetHUD(Unit unit)
     {
+        intentIcon.gameObject.SetActive(false);
         nameText.text = unit.unitName;
         hpText.text = $"{unit.currentHp} / {unit.maxHp}";
         hpSlider.maxValue = unit.maxHp;
         hpSlider.value = unit.currentHp;
-        intentIcon.gameObject.SetActive(false);
     }
     
     public void SetHp(Unit unit)
@@ -51,15 +51,16 @@ public class Unit : MonoBehaviour, IDamageable
 
     #region Functions Region
 
-    protected virtual int ChooseEffect()
+    public void ChooseEffect()
     {
-        var tempEffect = Random.Range(0, enemySO.actions.Length + 1);
         if(currentStrength > 0) currentStrength -= 1;
-
+        
+        provideEffect = 0;
+        var tempEffect = Random.Range(0, enemySO.actions.Length);
+        
         intentIcon.sprite = enemySO.actions[tempEffect].intentIcon;
         intentIcon.gameObject.SetActive(true);
-
-        return tempEffect;
+        provideEffect = tempEffect;
     }
     
     public void TakeDamage(int damage)

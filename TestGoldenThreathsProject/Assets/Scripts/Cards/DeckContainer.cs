@@ -64,19 +64,21 @@ public class DeckContainer : MonoBehaviour
         {
             for (int i = 0; i < numberOfCardsToDraw; i++)
             {
-                if (availableCardSlots[playerHand.Count] == true)
+                int aimedIndex = playerHand.Count;
+                if (availableCardSlots[aimedIndex] == true)
                 {
                     Card newCardDrawed = Instantiate(drawPile[i]);
                     
                     var cardTransform = newCardDrawed.transform;
                     
                     newCardDrawed.gameObject.SetActive(true);
-                    newCardDrawed.handIndex = i;
-                    cardTransform.position = cardSlots[i].position;
-                    cardTransform.parent = cardHandler;
-                    drawPile.Remove(newCardDrawed);
+                    newCardDrawed.handIndex = aimedIndex;
+                    cardTransform.position = cardSlots[aimedIndex].position;
+                    cardTransform.SetParent(cardHandler);
+                    
                     playerHand.Add(newCardDrawed);
-                    availableCardSlots[i] = false;
+                    drawPile.Remove(drawPile[i]);
+                    availableCardSlots[aimedIndex] = false;
                 }
                 else
                 {
@@ -88,9 +90,7 @@ public class DeckContainer : MonoBehaviour
         {
             ReplaceCardInDrawPile();
         }
-
-        deckSizeText.text = drawPile.Count.ToString();
-        discardPileSizeText.text = discardPile.Count.ToString();
+        CardsCountHud();
     }
 
     public void DiscardCard(Card card)
@@ -100,6 +100,8 @@ public class DeckContainer : MonoBehaviour
         card.gameObject.SetActive(false);
         availableCardSlots[card.handIndex] = true;
         ReplaceCards(card.handIndex);
+        
+        CardsCountHud();
     }
 
     private void ReplaceCardInDrawPile()
@@ -109,6 +111,8 @@ public class DeckContainer : MonoBehaviour
             drawPile.Add(card);
         }
         discardPile.Clear();
+
+        CardsCountHud();
     }
     
     private void ReplaceCards(int lastIndexGone)
@@ -121,8 +125,12 @@ public class DeckContainer : MonoBehaviour
             playerHand[i].handIndex --;
             availableCardSlots[i + 1] = true;
             availableCardSlots[i] = false;
-            
-            
         }
+    }
+
+    private void CardsCountHud()
+    {
+        deckSizeText.text = drawPile.Count.ToString();
+        discardPileSizeText.text = discardPile.Count.ToString();
     }
 }

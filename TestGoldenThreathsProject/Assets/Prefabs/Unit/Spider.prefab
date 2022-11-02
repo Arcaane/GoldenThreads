@@ -229,7 +229,7 @@ MonoBehaviour:
   nameText: {fileID: 3290758772580795541}
   hpText: {fileID: 3290758773350296581}
   hpSlider: {fileID: 3290758772558847413}
-  intentIcon: {fileID: 0}
+  intentIcon: {fileID: 7971920103665470508}
   unitName: 
   currentHp: 0
   currentShield: 0

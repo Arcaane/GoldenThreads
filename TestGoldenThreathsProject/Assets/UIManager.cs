@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerArmorText;
     [SerializeField] private Slider playerHealthSlider;
     [SerializeField] private GameObject armorSection;
+    [SerializeField] private TextMeshProUGUI playerManaText;
     #endregion
     
     private void Awake()
@@ -41,5 +42,10 @@ public class UIManager : MonoBehaviour
             armorSection.SetActive(false);
         }
     }
-    
+
+
+    public void SetPlayerMana(int currentMana, int maxMana)
+    {
+        playerManaText.text = $"{currentMana} / {maxMana}";
+    }
 }

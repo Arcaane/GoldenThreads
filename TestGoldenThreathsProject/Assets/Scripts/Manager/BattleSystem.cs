@@ -19,41 +19,60 @@ public class BattleSystem : MonoBehaviour
 
     private void SetupBattle()
     {
-        enemyManager.SpawnEnemies(enemyManager.numberOfEnemiesToSpawn);
         playerManager.UpdateUI();
+        enemyManager.SpawnEnemies(enemyManager.numberOfEnemiesToSpawn);
     }
 
     void StartBehavior()
     {
-        // Cartes joueur
-        deckContainer.StartTurn();
+        deckContainer.StartTurn(); // Cartes joueur
+        playerManager.UpdateUI(); // UI Player
+        enemyManager.ProvideAllEffects(); // Enemis Behavior à la fin du tour
         
-        // UI Player
-        // Enemis Behavior à la fin du tour
-        // Enemis UI
-        // --> Passer au tour du joueur (1)
         state = BattleStates.PLAYERTURN;
+        PlayerTurnBehavior();  // --> Passer au tour du joueur (1)
     }
 
     void PlayerTurnBehavior()
     {
         // Quand le joueur n'as plus de mana -> Passer au tour enemis
-        state = BattleStates.ENEMYTURN;
     }
 
     void EnemyTurnBehavior()
     {
-        // Quand les ennemis ont joués leurs tour --> Passer au Start
-        state = BattleStates.START;
+        enemyManager.ApplyAllEffects();
+
+        if (playerManager.isDead)
+        {
+            state = BattleStates.LOST;
+            EndBattle();
+        }
+        else
+        {
+            state = BattleStates.PLAYERTURN;
+            PlayerTurnBehavior();
+        }
     }
 
-    void OnWin()
+    void EndBattle()
     {
-        // Recompense + Effect de fin de combat
+        if (state == BattleStates.LOST)
+        {
+            // Mort + Stats 
+            playerManager.PlayerDeath();
+        }
+        else
+        {
+            // Récompense + Effect de fin de combat
+            playerManager.PlayerWin();
+        }
     }
 
-    void OnLose()
+    public void OnEndTurnButton()
     {
-        // Mort + Stats 
+        if (state != BattleStates.PLAYERTURN) return;
+
+        state = BattleStates.ENEMYTURN;
+        EnemyTurnBehavior();
     }
 }
