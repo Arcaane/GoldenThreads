@@ -12,7 +12,7 @@ public class DeckContainer : MonoBehaviour
     
     [SerializeField] private List<Card> discardPile;
 
-    [SerializeField] private List<Card> playerHand;
+    [SerializeField] public List<Card> playerHand;
     
     public Transform[] cardSlots;
     public bool[] availableCardSlots;

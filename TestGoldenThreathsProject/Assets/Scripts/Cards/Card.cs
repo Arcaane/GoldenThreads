@@ -214,5 +214,10 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
             damageable?.TakeDamage(damage);
         }
     }
+
+    public void PlayerBuff()
+    {
+        //player.
+    }
     #endregion
 }

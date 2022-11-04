@@ -10,23 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e9948c8812caf4498b73a0fa444f990, type: 3}
-  m_Name: DefendSO
+  m_Name: ASicionOfTheWarGodsSO
   m_EditorClassIdentifier: 
-  cardName: Defend
-  cardType: 1
-  cardClass: 0
-  cardTargetType: 0
+  cardName: 'A Scion of The War Gods '
+  cardType: 0
   cardDescription:
-    baseAmount: Donne 5 armure
-    upgradedAmount: Donne 8 armure
+    baseAmount: Deal 6 damage to all enemies
+    upgradedAmount: 
   cardCost:
-    baseAmount: 1
-    upgradedAmount: 1
+    baseAmount: 2
+    upgradedAmount: 0
   cardEffect:
-    baseAmount: 5
-    upgradedAmount: 8
-  buffAmount:
-    baseAmount: 0
+    baseAmount: 6
     upgradedAmount: 0
   isUpgraded: 0
   cardSplash: {fileID: 21300000, guid: 4249d2d1d43b88440864b0be178752a7, type: 3}

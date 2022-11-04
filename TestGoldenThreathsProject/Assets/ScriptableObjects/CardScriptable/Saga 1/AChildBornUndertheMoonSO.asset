@@ -10,24 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e9948c8812caf4498b73a0fa444f990, type: 3}
-  m_Name: StabSO
+  m_Name: AChildBornUndertheMoonSO
   m_EditorClassIdentifier: 
-  cardName: Stab
-  cardType: 0
-  cardClass: 0
-  cardTargetType: 1
+  cardName: A child born under the Moon
+  cardType: 1
   cardDescription:
-    baseAmount: "Inflige 5 d\xE9g\xE2ts"
-    upgradedAmount: "Inflige 7 d\xE9g\xE2ts"
+    baseAmount: Gain 1 Moon-Blessed
+    upgradedAmount: 
   cardCost:
     baseAmount: 1
-    upgradedAmount: 1
+    upgradedAmount: 0
   cardEffect:
-    baseAmount: 5
-    upgradedAmount: 7
-  buffAmount:
-    baseAmount: 0
+    baseAmount: 1
     upgradedAmount: 0
   isUpgraded: 0
-  cardSplash: {fileID: 21300000, guid: 000f8fbb245127f47ab84a537b1a50d1, type: 3}
-  cardIcon: {fileID: 21300000, guid: 329df364e7ac4fd439e9cb76e93ecb7d, type: 3}
+  cardSplash: {fileID: 21300000, guid: cbe11e934b0b14f418e61c455862a5d3, type: 3}

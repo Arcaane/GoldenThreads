@@ -1,6 +1,6 @@
 using UnityEngine.EventSystems;
 
-public class DefendCard : Card
+public class ABeingBornFromDirtCard : Card
 {
     public override void OnEndDrag(PointerEventData eventData)
     {

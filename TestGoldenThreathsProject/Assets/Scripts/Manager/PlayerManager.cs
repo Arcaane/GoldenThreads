@@ -10,6 +10,12 @@ public class PlayerManager : MonoBehaviour, IDamageable
     
     public RectTransform rectToAimPlayer;
     public int currentArmor;
+    
+    // Status
+    private bool isBlessedActive;
+    private bool isSunTurn;
+    private byte sunBlessStack;
+    private byte moonBlessStack;
 
     // Start is called before the first frame update
     void Start()
