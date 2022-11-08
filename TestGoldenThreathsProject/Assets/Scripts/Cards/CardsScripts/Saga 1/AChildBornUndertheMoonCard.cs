@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AChildBornUndertheMoonCard : Card
+public class AChildBornUnderTheMoonCard : Card
 {
     public override void OnEndDrag(PointerEventData eventData)
     {

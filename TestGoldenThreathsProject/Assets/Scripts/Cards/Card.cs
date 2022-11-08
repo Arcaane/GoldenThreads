@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -215,9 +216,17 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         }
     }
 
-    public void PlayerBuff()
+    public void PlayerBuff(CardType buffType, int buffAmount)
     {
-        //player.
+        switch (buffType)
+        {
+            case CardType.Moon: player.moonBlessStack += buffAmount; break;
+            case CardType.Sun: player.sunBlessStack += buffAmount; break;
+            case CardType.Berserk: player.berserkBlessStack += buffAmount; break;
+            case CardType.Enlight: player.enlightedBlessStack += buffAmount; break;
+            case CardType.Shocked: player.shockedBlessStack += buffAmount; break;
+            default: Debug.Log("TI a foutu koi le boss?"); break;
+        }
     }
     #endregion
 }

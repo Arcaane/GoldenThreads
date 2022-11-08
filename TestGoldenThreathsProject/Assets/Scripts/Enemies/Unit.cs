@@ -14,7 +14,7 @@ public class Unit : MonoBehaviour, IDamageable
     [SerializeField] protected Image intentIcon; 
     
     [SerializeField] protected string unitName;
-    [SerializeField] protected int currentHp;
+    [SerializeField] public int currentHp;
     [SerializeField] protected int currentShield;
     [SerializeField] protected int currentStrength;
     [SerializeField] protected int maxHp;

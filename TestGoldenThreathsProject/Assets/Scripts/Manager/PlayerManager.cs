@@ -11,15 +11,19 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public RectTransform rectToAimPlayer;
     public int currentArmor;
     
-    // Status
+    // Status variables
     private bool isBlessedActive;
     private bool isSunTurn;
-    private byte sunBlessStack;
-    private byte moonBlessStack;
+    public int sunBlessStack;
+    public int moonBlessStack;
+    public int berserkBlessStack;
+    public int enlightedBlessStack;
+    public int shockedBlessStack;
 
     // Start is called before the first frame update
     void Start()
     {
+        isBlessedActive = false;
         health = healthMax;
         StartTurn();
     }
@@ -89,5 +93,19 @@ public class PlayerManager : MonoBehaviour, IDamageable
         currentMana = manaMax;
         currentArmor = 0;
         UpdateUI();
+
+        if (!isBlessedActive) return;
+        
+    }
+
+    public void AddAstralBuff(bool isSun, int addAmount)
+    {
+        if (isSun) sunBlessStack += addAmount;
+        else moonBlessStack += addAmount;
+        
+        if(isBlessedActive) return;
+        
+        isBlessedActive = true;
+        isSunTurn = isSun;
     }
 }
