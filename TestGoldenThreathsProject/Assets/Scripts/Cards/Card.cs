@@ -220,8 +220,8 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     {
         switch (buffType)
         {
-            case CardType.Moon: player.moonBlessStack += buffAmount; break;
-            case CardType.Sun: player.sunBlessStack += buffAmount; break;
+            case CardType.Moon: player.AddAstralBuff(false, buffAmount); break;
+            case CardType.Sun: player.AddAstralBuff(true, buffAmount); break;
             case CardType.Berserk: player.berserkBlessStack += buffAmount; break;
             case CardType.Enlight: player.enlightedBlessStack += buffAmount; break;
             case CardType.Shocked: player.shockedBlessStack += buffAmount; break;

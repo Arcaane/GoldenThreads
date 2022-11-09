@@ -95,7 +95,9 @@ public class PlayerManager : MonoBehaviour, IDamageable
         UpdateUI();
 
         if (!isBlessedActive) return;
-        
+
+        isSunTurn = !isSunTurn;
+
     }
 
     public void AddAstralBuff(bool isSun, int addAmount)
