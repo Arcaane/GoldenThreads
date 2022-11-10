@@ -12,8 +12,8 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public int currentArmor;
     
     // Status variables
-    private bool isBlessedActive;
-    private bool isSunTurn;
+    public bool isBlessedActive;
+    public bool isSunTurn;
     public int sunBlessStack;
     public int moonBlessStack;
     public int berserkBlessStack;
@@ -80,6 +80,7 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         UIManager.Instance.SetPlayerHealth(health, healthMax, currentArmor);
         UIManager.Instance.SetPlayerMana(currentMana, manaMax);
+        
     }
 
     public void ManaCost(int manaCost)
@@ -97,13 +98,15 @@ public class PlayerManager : MonoBehaviour, IDamageable
         if (!isBlessedActive) return;
 
         isSunTurn = !isSunTurn;
-
+        UIManager.Instance.SetWeather(isSunTurn);
     }
 
     public void AddAstralBuff(bool isSun, int addAmount)
     {
         if (isSun) sunBlessStack += addAmount;
         else moonBlessStack += addAmount;
+        
+        UIManager.Instance.SetWeather(isSun);
         
         if(isBlessedActive) return;
         

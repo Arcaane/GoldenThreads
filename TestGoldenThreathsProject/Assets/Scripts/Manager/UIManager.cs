@@ -13,6 +13,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Slider playerHealthSlider;
     [SerializeField] private GameObject armorSection;
     [SerializeField] private TextMeshProUGUI playerManaText;
+
+    [SerializeField] private Image weatherImage;
+    [SerializeField] private Sprite sunIcon;
+    [SerializeField] private Sprite moonIcon;
     #endregion
     
     private void Awake()
@@ -42,10 +46,14 @@ public class UIManager : MonoBehaviour
             armorSection.SetActive(false);
         }
     }
-
-
+    
     public void SetPlayerMana(int currentMana, int maxMana)
     {
         playerManaText.text = $"{currentMana} / {maxMana}";
+    }
+
+    public void SetWeather(bool isSun)
+    {
+        weatherImage.sprite = isSun ? sunIcon : moonIcon;
     }
 }

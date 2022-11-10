@@ -201,6 +201,15 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     {
         player.ManaCost(manaCost);
 
+        if (player.isBlessedActive)
+        {
+            if (player.isSunTurn && player.sunBlessStack != 0)
+            {
+                damage = Mathf.CeilToInt(damage * 1.5f);
+                player.sunBlessStack--;
+            }
+        }
+        
         if (allEnemies)
         {
             foreach (var e in EnemyManager.Instance.enemiesRect)
@@ -214,9 +223,16 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
             IDamageable damageable = enemy.GetComponent<IDamageable>();
             damageable?.TakeDamage(damage);
         }
+
+        if (player.isBlessedActive && !player.isSunTurn && player.moonBlessStack != 0)
+        {
+            damage = Mathf.CeilToInt(damage * 0.5f);
+            DealDamage(enemy, damage, 0, true);
+            player.moonBlessStack--;
+        }
     }
 
-    public void PlayerBuff(CardType buffType, int buffAmount)
+    public void PlayerBuff(CardType buffType, int buffAmount, int cardCost)
     {
         switch (buffType)
         {
@@ -227,6 +243,14 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
             case CardType.Shocked: player.shockedBlessStack += buffAmount; break;
             default: Debug.Log("TI a foutu koi le boss?"); break;
         }
+        
+        player.ManaCost(cardCost);
     }
+
+    public void SoulSplit(RectTransform enemy, int manaCost, bool allEnemies = false)
+    {
+        
+    }
+    
     #endregion
 }

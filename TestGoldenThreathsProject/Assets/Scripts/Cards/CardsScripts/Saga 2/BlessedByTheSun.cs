@@ -1,6 +1,6 @@
 using UnityEngine.EventSystems;
 
-public class AChildBornUnderTheMoonCard : Card
+public class BlessedByTheSun : Card
 {
     public override void OnEndDrag(PointerEventData eventData)
     {

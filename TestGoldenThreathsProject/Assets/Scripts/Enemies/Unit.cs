@@ -41,8 +41,8 @@ public class Unit : MonoBehaviour, IDamageable
         hpSlider.maxValue = unit.maxHp;
         hpSlider.value = unit.currentHp;
     }
-    
-    public void SetHp(Unit unit)
+
+    private void SetHp(Unit unit)
     {
         hpSlider.value = unit.currentHp;
         hpText.text = $"{unit.currentHp} / {unit.maxHp}";
@@ -114,7 +114,6 @@ public class Unit : MonoBehaviour, IDamageable
     {
         currentStrength += i;
         Debug.Log($"{enemySO.enemyName} gain {i} strength");
-
     }
     
     protected void DoExhaust()
