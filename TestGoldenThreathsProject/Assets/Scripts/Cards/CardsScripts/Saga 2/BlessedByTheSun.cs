@@ -1,5 +1,4 @@
 using UnityEngine.EventSystems;
-
 public class BlessedByTheSun : Card
 {
     public override void OnEndDrag(PointerEventData eventData)

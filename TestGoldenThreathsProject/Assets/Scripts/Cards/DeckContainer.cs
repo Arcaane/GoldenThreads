@@ -10,7 +10,7 @@ public class DeckContainer : MonoBehaviour
     [SerializeField] private List<Card> drawPile;
     [SerializeField] private TextMeshProUGUI deckSizeText;
     
-    [SerializeField] private List<Card> discardPile;
+    [SerializeField] public List<Card> discardPile;
 
     [SerializeField] public List<Card> playerHand;
     
@@ -45,10 +45,9 @@ public class DeckContainer : MonoBehaviour
         drawPile = new List<Card>();
 
         if (drawPile.Count > 1) return;
+        
         for (int i = 0; i < baseDeck.Length; i++)
-        {
             drawPile.Add(baseDeck[i]);
-        }
     }
 
     void ShuffleDeck()

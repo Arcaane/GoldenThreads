@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -96,18 +95,20 @@ public class Card : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     {
         cardNameText.text = cardScriptableObjectSo.cardName;
         cardTypeText.text = $"{cardScriptableObjectSo.cardType}";
+        
+        cardCost.text = cardScriptableObjectSo.cardCost.baseAmount.ToString();
+        cardDescriptionText.text = cardScriptableObjectSo.cardDescription.baseDescription;
+        
 
-        if (cardScriptableObjectSo.isUpgraded)
+        /*
+         * if (cardScriptableObjectSo.isUpgraded)
         {
             cardCost.text = cardScriptableObjectSo.cardCost.upgradedAmount.ToString();
-            cardDescriptionText.text = cardScriptableObjectSo.cardDescription.upgradedAmount;
+            cardDescriptionText.text = cardScriptableObjectSo.cardDescription.sagaDescription;
         }
-        else
-        {
-            cardCost.text = cardScriptableObjectSo.cardCost.baseAmount.ToString();
-            cardDescriptionText.text = cardScriptableObjectSo.cardDescription.baseAmount;
-        }
-
+         */
+        
+        
         if (cardScriptableObjectSo.cardSplash != null)
         {
             cardSplashSprite.sprite = cardScriptableObjectSo.cardSplash;

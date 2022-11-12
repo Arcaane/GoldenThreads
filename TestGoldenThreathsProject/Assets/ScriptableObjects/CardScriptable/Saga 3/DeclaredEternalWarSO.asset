@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9948c8812caf4498b73a0fa444f990, type: 3}
   m_Name: DeclaredEternalWarSO
   m_EditorClassIdentifier: 
-  cardName: 
+  cardName: Declared eternal war
   cardType: 0
   cardDescription:
-    baseAmount: 
+    baseAmount: Deal 8 damage and discard all visible cards
     upgradedAmount: 
   cardCost:
-    baseAmount: 0
+    baseAmount: 1
     upgradedAmount: 0
   cardEffect:
-    baseAmount: 0
+    baseAmount: 8
     upgradedAmount: 0
   isUpgraded: 0
-  cardSplash: {fileID: 21300000, guid: cbe11e934b0b14f418e61c455862a5d3, type: 3}
+  cardSplash: {fileID: 21300000, guid: 4249d2d1d43b88440864b0be178752a7, type: 3}

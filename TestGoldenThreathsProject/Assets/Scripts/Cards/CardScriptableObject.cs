@@ -14,7 +14,7 @@ public class CardScriptableObject : ScriptableObject
     public CardDescription cardDescription;
     public CardAmount cardCost;
     public CardAmount cardEffect;
-    public bool isUpgraded;
+    public SagaClass cardSaga;
     
     [Space(5)]
     [Header("Graphs")]
@@ -25,13 +25,13 @@ public class CardScriptableObject : ScriptableObject
 public struct CardAmount
 {
     public int baseAmount;
-    public int upgradedAmount;
+    public int sagaAmount;
 }
 [System.Serializable]
 public struct CardDescription
 {
-    public string baseAmount;
-    public string upgradedAmount;
+    public string baseDescription;
+    public string sagaDescription;
 }
 
 public enum CardType
@@ -43,4 +43,14 @@ public enum CardType
     Enlight,
     Shocked,
     SoulSplit
+}
+
+public enum SagaClass
+{
+    None = 0,
+    Saga1 = 1,
+    Saga2 = 2,
+    Saga3 = 3,
+    Saga4 = 4,
+    Saga5 = 5,
 }

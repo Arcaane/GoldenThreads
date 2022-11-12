@@ -26,18 +26,18 @@ public class CardDisplay : MonoBehaviour
     {
         cardNameText.text = cardScriptableObjectSo.cardName;
         cardTypeText.text = $"{cardScriptableObjectSo.cardType}";
-
-        if (cardScriptableObjectSo.isUpgraded)
+        
+        cardCost.text = cardScriptableObjectSo.cardCost.baseAmount.ToString();
+        cardDescriptionText.text = cardScriptableObjectSo.cardDescription.baseDescription;
+        
+        /*
+         if (cardScriptableObjectSo.isUpgraded)
         {
-            cardCost.text = cardScriptableObjectSo.cardCost.upgradedAmount.ToString();
-            cardDescriptionText.text = cardScriptableObjectSo.cardDescription.upgradedAmount;
+            cardCost.text = cardScriptableObjectSo.cardCost.sagaAmount.ToString();
+            cardDescriptionText.text = cardScriptableObjectSo.cardDescription.sagaDescription;
         }
-        else
-        {
-            cardCost.text = cardScriptableObjectSo.cardCost.baseAmount.ToString();
-            cardDescriptionText.text = cardScriptableObjectSo.cardDescription.baseAmount;
-        }
-
+         */
+        
         if (cardScriptableObjectSo.cardSplash != null)
         {
             cardSplashSprite.sprite = cardScriptableObjectSo.cardSplash;
